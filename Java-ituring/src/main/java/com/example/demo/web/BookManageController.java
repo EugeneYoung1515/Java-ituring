@@ -133,14 +133,6 @@ public class BookManageController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/book/{bookId}/update",method = RequestMethod.GET)
-    public ModelAndView updateBookInfo(@PathVariable Integer bookId,HttpServletRequest httpServletRequest){
-        ModelAndView modelAndView = BookInfoPage(bookId,httpServletRequest);
-        modelAndView.setViewName("/updateBookInfo");
-        modelAndView.addObject("allSeries",bookService.getAllSeries());
-        modelAndView.addObject("allAlsoLike",bookService.getAllAlsoLike());
-        return modelAndView;
-    }
 
     public String formatUpdateEnterNum(int num){
         if(num > 1000){

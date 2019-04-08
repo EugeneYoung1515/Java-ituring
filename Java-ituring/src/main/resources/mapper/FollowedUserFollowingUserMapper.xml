@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.FollowedUserFollowingUserMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.FollowedUserFollowingUser">
+    <result column="ed_user_id" jdbcType="INTEGER" property="edUserId" />
+    <result column="ing_user_id" jdbcType="INTEGER" property="ingUserId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.demo.model.FollowedUserFollowingUser">
+    insert into t_followed_user_following_user (ed_user_id, ing_user_id)
+    values (#{edUserId,jdbcType=INTEGER}, #{ingUserId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.FollowedUserFollowingUser">
+    insert into t_followed_user_following_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="edUserId != null">
+        ed_user_id,
+      </if>
+      <if test="ingUserId != null">
+        ing_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="edUserId != null">
+        #{edUserId,jdbcType=INTEGER},
+      </if>
+      <if test="ingUserId != null">
+        #{ingUserId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteByIngUserId">
+    delete from t_followed_user_following_user where ing_user_id = #{ingUserId}
+  </delete>
+  <select id="isAttendtionByFollowingUserId" resultType="java.lang.Integer">
+    select count(*) from t_followed_user_following_user where ing_user_id = #{ingUserId}
+  </select>
+</mapper>

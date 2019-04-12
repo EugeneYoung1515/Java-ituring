@@ -6,7 +6,7 @@
 
 数据库使用PostgreSql。  
 使用Mybatis Generator生成Model类、Mapper文件和接口，以XML方式书写SQL语句。  
-涉及多种表间关系，主要使用JOIN处理表间关系。继承resultMap，跨文件引用Mapper文件元素，实现代码代码复用。使用Mybatis的动态SQL，实现多条件查询。  
+涉及多种表间关系，主要使用JOIN处理表间关系。继承resultMap，跨文件引用Mapper文件元素，实现代码复用。使用Mybatis的动态SQL，实现多条件查询。  
 使用PageHelper实现分页功能。
 
 - **Web层和视图层**

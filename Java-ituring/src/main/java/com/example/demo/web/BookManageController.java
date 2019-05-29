@@ -29,6 +29,29 @@ import java.util.List;
 @Controller
 public class BookManageController {
 
+    /*
+    Category 相关的设计
+
+    t_book表有字段category_id记录书所属的最近一级分类id
+
+    还有3个字段 first_grade_id second_grade_id third_grade_id
+    后面这三个字段用来多条件查询时 从分类拿到书
+
+    t_category表有grade字段用于表示所处的级别
+
+    t_category_child_category表示父子之间的关系
+
+
+    图书详情页是用到了t_category和t_category_child_category
+
+    多条件查询那里 获得分类列表
+    是用到了t_category表有grade字段 以及获得父分类的方法 和 获得所有子分类的方法
+
+
+   也就是新加入一本书 要 1.t_book表有字段category_id记录书所属的最近一级分类id 2.还有3个字段 first_grade_id second_grade_id third_grade_id
+
+     */
+
 
     private BookService bookService;
 
@@ -72,11 +95,11 @@ public class BookManageController {
         //System.out.println(user.getUserId());
         if(user!=null){
             modelAndView.addObject("fav",bookService.bookIsFavByBookIdAndUserId(bookId,user.getUserId()));
-            System.out.println(bookService.bookIsFavByBookIdAndUserId(bookId,user.getUserId()));
+            //System.out.println(bookService.bookIsFavByBookIdAndUserId(bookId,user.getUserId()));
         }
         if(user!=null){
             modelAndView.addObject("vote",bookService.bookIsVoteByBookIdAndUserId(bookId,user.getUserId()));
-            System.out.println(bookService.bookIsVoteByBookIdAndUserId(bookId,user.getUserId()));
+            //System.out.println(bookService.bookIsVoteByBookIdAndUserId(bookId,user.getUserId()));
         }
 
         List<BookExt> sameSeriesBooks = bookService.getSameSeriesBooks(bookExt.getSeries().getSeriesId(),bookId);
@@ -116,9 +139,7 @@ public class BookManageController {
         User user = (User)httpServletRequest.getSession().getAttribute("userSession");
         if(item!=null && user!=null){
             Book book = bookService.favOrVote(bookId,user.getUserId(),item);
-            if(book==null){
-                book=bookService.getBook(bookId);
-            }
+
             //BookExt bookExt = bookService.getBookExt2(bookId);
             //bookService.updateEnterNum(bookExt);
             String formatUpdateEnterNum = formatUpdateEnterNum(book.getBookEnterNum());
@@ -175,6 +196,7 @@ public class BookManageController {
         //System.out.println("--"+userSessionTest.getPersonalWebsite());
 
         User user = (User)httpServletRequest.getSession().getAttribute("userSession");
+        System.out.println(user+"sss");
         System.out.println(tab+ " "+sort+" "+category);
         ModelAndView modelAndView = new ModelAndView();
         int grade=-1;
@@ -218,7 +240,11 @@ public class BookManageController {
         }
         Integer grade1 = grade;
         modelAndView.addObject("mainPageTags",bookService.getMainPageTags());
-        modelAndView.addObject("BooksByCondition",new PageInfo<BookExt>(bookService.getBooksByCondition(tab,sort,grade1,category,page,user.getUserId())));
+        if(user!=null){
+            modelAndView.addObject("BooksByCondition",new PageInfo<BookExt>(bookService.getBooksByCondition(tab,sort,grade1,category,page,user.getUserId())));
+        }else{
+            modelAndView.addObject("BooksByCondition",new PageInfo<BookExt>(bookService.getBooksByCondition(tab,sort,grade1,category,page,null)));
+        }
         modelAndView.addObject("tab",tab);
         modelAndView.addObject("sort",sort);
         //modelAndView.addObject("category",category);
@@ -242,7 +268,9 @@ public class BookManageController {
 
     @RequestMapping(value = "/menu/books",method = RequestMethod.GET)
     public ModelAndView search2(@RequestParam(name="q") String q,@RequestParam(name="page",defaultValue = "1") Integer page){
-        return search(q,page);
+        ModelAndView modelAndView = search(q,page);
+        modelAndView.setViewName("/searchResultPageFragment");
+        return modelAndView;
     }
 
 

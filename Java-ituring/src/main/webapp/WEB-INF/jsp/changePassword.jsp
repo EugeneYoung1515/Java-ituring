@@ -24,7 +24,10 @@
 </head>
 <body>
 <div class="layout-head">
+    <!--
     <form action="/log-out?returnUrl=http%3a%2f%2fwww.ituring.com.cn%2fuser%2fnotification" method="post" id="logoutForm">
+    -->
+    <form action="/log-out" method="post" id="logoutForm">
         <input name="__RequestVerificationToken" type="hidden" value="P2ArIIADO8oHUTooJDrcnyqSV4lcXT2fRFTGUGEBWnRWbnkGCqL1ZJoeQhbgn1PMnCizG-zXMIABuIgj8B0o_znXhDB4RjZ5XX-myN3xg1UIdbMcHQRAvQagsFTCUbv_nQSoqJFoMdz22UUCSntsuA2" />
     </form>
     <div class="container">
@@ -177,7 +180,7 @@ ${Incorrect}
                 $("#new-total-count").text(0).addClass("hide");
             }
         }
-        
+
         function confirmDelete() {
             return confirm('确认删除？');
         }
@@ -193,6 +196,7 @@ ${Incorrect}
             $('input.calmer, button.calmer').removeAttr('disabled');
         }
 
+        /*
         strHost = document.location.hostname;
         if ((strHost.indexOf('ituring.com.cn') + strHost.indexOf('turingbook.com')) > -2) {
             // google analytics begin
@@ -209,6 +213,7 @@ ${Incorrect}
             })();
             // google analytics end
         };
+        */
     </script>
     
     <script src="/bundles/jqueryval?v=sTM6z75i3uDpVeh__Zai1IpnDnqY9pO-TNy0Ztaw6Y81"></script>

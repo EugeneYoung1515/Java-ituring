@@ -52,8 +52,12 @@
                                         </li>
                                     </ul>
                                     <ul id="head-nav-secondary" class="head-nav">
+                                        <!--
                                         <li class="head-compose"><a href="http://account.ituring.com.cn/register?returnUrl=http%3a%2f%2fwww.ituring.com.cn%2fsearch%3fq%3djava">新会员注册</a></li>
                                         <li class="head-compose"><a href="http://account.ituring.com.cn/log-in?returnUrl=http%3a%2f%2fwww.ituring.com.cn%2fsearch%3fq%3djava">登录</a></li>
+                                        -->
+                                        <li class="head-compose"><a href="http://account.ituring.com.cn/register">新会员注册</a></li>
+                                        <li class="head-compose"><a href="http://account.ituring.com.cn/log-in">登录</a></li>
                                         <div class="navbar-close"><a href="#nav-user" class="fa fa-angle-up"></a></div>
                                     </ul>
                                 </div>

@@ -29,4 +29,5 @@ public interface BookParMapper {
      Integer isVoteByPrimaryKey(Integer bookId, Integer userId);
      List<BookExt> selectBookWithOriginalTranslatorByUserId(Integer userId);
      List<Integer> selectBookIdByUserId(Integer userId);
+     Integer selectBookVoteByBookId(Integer bookId);
      }

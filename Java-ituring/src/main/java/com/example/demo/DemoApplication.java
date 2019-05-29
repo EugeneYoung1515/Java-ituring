@@ -3,6 +3,9 @@ package com.example.demo;
 import com.example.demo.shiro.CaptchaFormAuthenticationFilter;
 import com.example.demo.shiro.MyShiroRealm;
 import com.example.demo.web.AfterShiroFilter;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -17,18 +20,26 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
+import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 @EnableTransactionManagement
 @SpringBootApplication
 @MapperScan({"com.example.demo.dao"})
+@EnableScheduling
 public class DemoApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
 
 	public static void main(String[] args) {
@@ -185,6 +196,39 @@ public class DemoApplication extends SpringBootServletInitializer implements Web
 		//afterShiroFilter.setDispatcherTypes(DispatcherType.REQUEST);//对于一个请求到视图的url会过滤两次 一次是url 第二次是视图的路径
 		//设置成DispatcherType.REQUEST 第二次就不会有过滤 因为发到视图 是转发的
 		return afterShiroFilter;
+	}
+
+	/*
+	@Bean//这个配置应该能转移到配置文件中
+	public JedisConnectionFactory jedisConnectionFactory(){
+		JedisConnectionFactory factory = new JedisConnectionFactory();
+		//factory.setHostName("localhost");
+		factory.setPassword("kmlbyz520");
+		return factory;
+	}
+	*/
+
+	@Bean
+	public <T> RedisTemplate<String,T> redisTemplate(RedisConnectionFactory rcf){
+		RedisTemplate<String, T> redisTemplate = new RedisTemplate<String, T>();
+		redisTemplate.setConnectionFactory(rcf);
+		redisTemplate.setKeySerializer(new StringRedisSerializer());
+		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+
+		Jackson2JsonRedisSerializer serializer = new Jackson2JsonRedisSerializer(Object.class);
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+		mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);//这几个常量的意思是
+		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS"));
+
+		serializer.setObjectMapper(mapper);
+
+		redisTemplate.setValueSerializer(serializer);
+		redisTemplate.setHashValueSerializer(serializer);
+
+		redisTemplate.afterPropertiesSet();
+		return redisTemplate;
 	}
 
 }

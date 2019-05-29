@@ -82,16 +82,39 @@
 		<div class="col-md-9 col-sm-9 main">
 			<div class="nav-tab-primary">
 				<ul class="nav nav-tabs">
+                    <c:if test="${sort != 'new'}">
                         <li >
                             <a href="/book?tab=${tab}&sort=new<c:if test='${category != null}'>&category=${category.categoryId}</c:if>">最新</a>
                         </li>
+                    </c:if>
+                    <c:if test="${sort == 'new'}">
+                        <li   class="active"    >
+                            <a href="/book?tab=${tab}&sort=new<c:if test='${category != null}'>&category=${category.categoryId}</c:if>">最新</a>
+                        </li>
+                    </c:if>
+                    <c:if test="${sort != 'hot'}">
+                        <li >
+                            <a href="/book?tab=${tab}&sort=hot<c:if test='${category != null}'>&category=${category.categoryId}</c:if>">热门</a>
+                        </li>
+                    </c:if>
+                    <c:if test="${sort == 'hot'}">
                         <li   class="active"    >
                             <a href="/book?tab=${tab}&sort=hot<c:if test='${category != null}'>&category=${category.categoryId}</c:if>">热门</a>
                         </li>
+                    </c:if>
+                    <c:if test="${sort != 'vote'}">
                         <li >
                             <a href="/book?tab=${tab}&sort=vote<c:if test='${category != null}'>&category=${category.categoryId}</c:if>">推荐</a>
                         </li>
+                    </c:if>
+                    <c:if test="${sort == 'vote'}">
+                        <li   class="active"    >
+                            <a href="/book?tab=${tab}&sort=vote<c:if test='${category != null}'>&category=${category.categoryId}</c:if>">推荐</a>
+                        </li>
+                    </c:if>
+                    <!--
 				    <li class="pull-right"><a href="/search/advanced">图书高级搜索</a></li>
+				    -->
 				</ul>
 			</div>
 
@@ -345,6 +368,7 @@
                 }
             })
         })
+
         function confirmDelete() {
             return confirm('确认删除？');
         }
@@ -354,6 +378,8 @@
                 scrollTop: $(id).offset().top - 70
             }, 200);
         }
+
+        /*
         strHost = document.location.hostname;
         if ((strHost.indexOf('ituring.com.cn') + strHost.indexOf('turingbook.com')) > -2) {
             // google analytics begin
@@ -370,6 +396,7 @@
             })();
             // google analytics end
         };
+        */
     </script>
     
     

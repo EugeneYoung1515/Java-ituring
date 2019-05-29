@@ -29,7 +29,7 @@ public interface BookMapper extends BookParMapper{
     //Book findByName(@Param("bookId") Integer bookId);
     //这个注解方式能跑跑得通 说明注解方式和xml能混用
 
-    @SelectProvider(type = com.example.demo.dao.BooksByConditionProvider.class,method = "getResult")
-    @ResultMap("com.example.demo.dao.BookMapper.BookWithOriginalAuthorTranslatorAuthorResultMapSelect")
-    List<BookExt> selectBookWithOriginalTranslatorOrderByCondition(Condition condition);
+    //@SelectProvider(type = com.example.demo.dao.BooksByConditionProvider.class,method = "getResult")
+    //@ResultMap("com.example.demo.dao.BookMapper.BookWithOriginalAuthorTranslatorAuthorResultMapSelect")
+    //List<BookExt> selectBookWithOriginalTranslatorOrderByCondition(Condition condition);
 }

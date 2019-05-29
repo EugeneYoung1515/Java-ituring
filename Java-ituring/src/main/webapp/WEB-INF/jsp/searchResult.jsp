@@ -33,6 +33,7 @@
     <![endif]-->
 </head>
 <body>
+<%@ include file="includeTop.jsp"%>
 <!--
     <div class="layout-head">
                                 <div class="container">
@@ -197,6 +198,8 @@
                 scrollTop: $(id).offset().top - 70
             }, 200);
         }
+
+        /*
         strHost = document.location.hostname;
         if ((strHost.indexOf('ituring.com.cn') + strHost.indexOf('turingbook.com')) > -2) {
             // google analytics begin
@@ -213,6 +216,7 @@
             })();
             // google analytics end
         };
+        */
     </script>
     
     

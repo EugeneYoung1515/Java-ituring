@@ -23,8 +23,11 @@
     <![endif]-->
 </head>
 <body>
-<div class="layout-head">
+<div class="layout-head">\
+    <!--
     <form action="/log-out?returnUrl=http%3a%2f%2fwww.ituring.com.cn%2fuser%2fnotification" method="post" id="logoutForm">
+    -->
+    <form action="/log-out" method="post" id="logoutForm">
         <input name="__RequestVerificationToken" type="hidden" value="P2ArIIADO8oHUTooJDrcnyqSV4lcXT2fRFTGUGEBWnRWbnkGCqL1ZJoeQhbgn1PMnCizG-zXMIABuIgj8B0o_znXhDB4RjZ5XX-myN3xg1UIdbMcHQRAvQagsFTCUbv_nQSoqJFoMdz22UUCSntsuA2" />
     </form>
     <div class="container">
@@ -46,8 +49,12 @@
         </ul>
         <c:if test="${userSession == null}">
             <ul id="head-nav-secondary" class="head-nav">
+                <!--
                 <li class="head-compose"><a href="/register?returnUrl=http%3a%2f%2fwww.ituring.com.cn%2f">新会员注册</a></li>
                 <li class="head-compose"><a href="/log-in?returnUrl=http%3a%2f%2fwww.ituring.com.cn%2f">登录</a></li>
+                -->
+                <li class="head-compose"><a href="/register">新会员注册</a></li>
+                <li class="head-compose"><a href="/log-in">登录</a></li>
                 <div class="navbar-close"><a href="#nav-user" class="fa fa-angle-up"></a></div>
             </ul>
         </c:if>
@@ -178,6 +185,7 @@
             $('input.calmer, button.calmer').removeAttr('disabled');
         }
 
+        /*
         strHost = document.location.hostname;
         if ((strHost.indexOf('ituring.com.cn') + strHost.indexOf('turingbook.com')) > -2) {
             // google analytics begin
@@ -194,6 +202,7 @@
             })();
             // google analytics end
         };
+        */
     </script>
     
     

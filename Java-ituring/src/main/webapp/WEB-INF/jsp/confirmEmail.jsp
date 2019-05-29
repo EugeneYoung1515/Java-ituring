@@ -29,21 +29,25 @@
                                         <a href="#nav-main" class="toggle-main ryi-nav-sandwich"></a>
                                     </div>
                                     <a id="head-navbar-toggle" href="#" class="head-navbar-toggle"></a>
-                                    <div class="head-logo"><a href="http://www.ituring.com.cn/">图灵社区</a></div>
+                                    <div class="head-logo"><a href="/">图灵社区</a></div>
                                     <ul id="head-nav-primary" class="head-nav">
-                                        <li class="head-nav-home"><a href="http://www.ituring.com.cn/">首页</a></li>
-                                        <li><a href="http://www.ituring.com.cn/book">图书</a></li>
-                                        <li><a href="http://www.ituring.com.cn/article">文章</a></li>
+                                        <li class="head-nav-home"><a href="/">首页</a></li>
+                                        <li><a href="/book">图书</a></li>
+                                        <li><a href="/article">文章</a></li>
                                         <li class="head-search">
-                                            <form action="http://www.ituring.com.cn/search">
+                                            <form action="/search">
                                                 <input type="search" name="q" placeholder="技术改变世界 阅读塑造人生" class="key">
                                                 <button class="go btn btn-link"><span class="fa fa-search"></span></button>
                                             </form>
                                         </li>
                                     </ul>
                                     <ul id="head-nav-secondary" class="head-nav">
+                                        <!--
                                         <li class="head-compose"><a href="/register?returnUrl=http%3A%2F%2Faccount.ituring.com.cn%2Faccount%2Fconfirmemail%3Fcode%3DJXpsIdaCWGGaS%252BKG9ciGZLpI5FifMxwgGSeAAZf%252BM0Qekm1Nmceo4vo3G0%252Bn6HenLeHHBtGjAkALzdD2tyV5zHnhhHDE6EGw57K2%252FOFnb9suaZWGM3DtPJGMAllWPahBEIjsZSWgy0LcJFdOnkOIUZtIe1qo%252BxYDTYyYXcxRXYE%253D%26userId%3D339567" id="registerLink">新会员注册</a></li>
                                         <li class="head-compose"><a href="/log-in?returnUrl=http%3A%2F%2Faccount.ituring.com.cn%2Faccount%2Fconfirmemail%3Fcode%3DJXpsIdaCWGGaS%252BKG9ciGZLpI5FifMxwgGSeAAZf%252BM0Qekm1Nmceo4vo3G0%252Bn6HenLeHHBtGjAkALzdD2tyV5zHnhhHDE6EGw57K2%252FOFnb9suaZWGM3DtPJGMAllWPahBEIjsZSWgy0LcJFdOnkOIUZtIe1qo%252BxYDTYyYXcxRXYE%253D%26userId%3D339567" id="loginLink">登录</a></li>
+                                        -->
+                                        <li class="head-compose"><a href="/register" id="registerLink">新会员注册</a></li>
+                                        <li class="head-compose"><a href="/log-in" id="loginLink">登录</a></li>
                                         <div class="navbar-close"><a href="#nav-user" class="fa fa-angle-up"></a></div>
                                     </ul>
                                 </div>
@@ -108,6 +112,7 @@
             $('input.calmer, button.calmer').removeAttr('disabled');
         }
 
+        /*
         strHost = document.location.hostname;
         if ((strHost.indexOf('ituring.com.cn') + strHost.indexOf('turingbook.com')) > -2) {
             // google analytics begin
@@ -124,6 +129,7 @@
             })();
             // google analytics end
         };
+        */
     </script>
     
     

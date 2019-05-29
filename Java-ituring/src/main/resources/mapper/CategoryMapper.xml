@@ -110,4 +110,6 @@
     left outer join t_category as b on m.category_id = b.category_id
     where t.category_id = #{categoryId,jdbcType=INTEGER}
   </select>
+
+  <!--注意上面几个select 都少了grade相关的列-->
 </mapper>

@@ -24,7 +24,10 @@
 </head>
 <body>
 <div class="layout-head">
+    <!--
     <form action="/log-out?returnUrl=http%3a%2f%2fwww.ituring.com.cn%2fuser%2fnotification" method="post" id="logoutForm">
+    -->
+    <form action="/log-out" method="post" id="logoutForm">
         <input name="__RequestVerificationToken" type="hidden" value="P2ArIIADO8oHUTooJDrcnyqSV4lcXT2fRFTGUGEBWnRWbnkGCqL1ZJoeQhbgn1PMnCizG-zXMIABuIgj8B0o_znXhDB4RjZ5XX-myN3xg1UIdbMcHQRAvQagsFTCUbv_nQSoqJFoMdz22UUCSntsuA2" />
     </form>
     <div class="container">
@@ -96,15 +99,19 @@
                     $('input[name=q]').attr('placeholder', '请输入您感兴趣的');
                 }
             })
+
+            /*
             $('#captchaImage').click(function () {
                 $(this).attr('src', $(this).attr('src') + '?' + Math.random());
             });
                 
             setInterval(getNewNotificationCount, 120000);
             setInterval(getNewMessageCount, 120000);
+            */
             
         })
-            
+
+        /*
         function getNewNotificationCount() {
             $.get("/home/checknewnotificationcount", function (n) {
                 if (n > 0) {
@@ -136,7 +143,8 @@
                 $("#new-total-count").text(0).addClass("hide");
             }
         }
-        
+        */
+
         function confirmDelete() {
             return confirm('确认删除？');
         }
@@ -152,6 +160,7 @@
             $('input.calmer, button.calmer').removeAttr('disabled');
         }
 
+        /*
         strHost = document.location.hostname;
         if ((strHost.indexOf('ituring.com.cn') + strHost.indexOf('turingbook.com')) > -2) {
             // google analytics begin
@@ -168,6 +177,7 @@
             })();
             // google analytics end
         };
+        */
     </script>
     
     

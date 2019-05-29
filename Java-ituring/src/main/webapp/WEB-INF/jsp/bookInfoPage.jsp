@@ -477,6 +477,7 @@ ${book.feature}
                         </div>
 
                     <script type="text/javascript">
+                        /*
                         function ShowLoginForm() {
                             $("#comment-form").html('<iframe id="the_iframe" style="padding-left:30px;" name="the_iframe" src="http://account.ituring.com.cn/iframe-log-in?returnUrl=http://www.ituring.com.cn/book/2464&hash=gotocomment" width="400" height="280" scrolling="no" frameborder="0" allowtransparency="true">');
                         }
@@ -655,6 +656,8 @@ ${book.feature}
                             })
 
                         })
+
+                        */
                     </script>
 
                 </div>
@@ -684,6 +687,7 @@ ${book.feature}
             }
         })
     })
+
     function confirmDelete() {
         return confirm('确认删除？');
     }
@@ -693,6 +697,7 @@ ${book.feature}
             scrollTop: $(id).offset().top - 70
         }, 200);
     }
+    /*
     strHost = document.location.hostname;
     if ((strHost.indexOf('ituring.com.cn') + strHost.indexOf('turingbook.com')) > -2) {
         // google analytics begin
@@ -709,6 +714,7 @@ ${book.feature}
         })();
         // google analytics end
     };
+    */
 </script>
 
 

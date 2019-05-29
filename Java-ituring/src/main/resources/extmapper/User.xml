@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserMapper">
+    <select id="selectCountByUserName" resultType="java.lang.Integer">
+        select
+        count(*)
+        from t_user
+        where user_name = #{userName}
+    </select>
+    <select id="selectCountByEmail" resultType="java.lang.Integer">
+        select
+        count(*)
+        from t_user
+        where email = #{email}
+    </select>
+    <insert id="insertSelectiveReturnId" parameterType="com.example.demo.model.User"  useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="largeAvatar != null">
+                large_avatar,
+            </if>
+            <if test="registerDate != null">
+                register_date,
+            </if>
+            <if test="personalWebsite != null">
+                personal_website,
+            </if>
+            <if test="userIntro != null">
+                user_intro,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="emailConfirmed != null">
+                email_confirmed,
+            </if>
+            <if test="code != null">
+                code
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="largeAvatar != null">
+                #{largeAvatar,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDate != null">
+                #{registerDate,jdbcType=DATE},
+            </if>
+            <if test="personalWebsite != null">
+                #{personalWebsite,jdbcType=VARCHAR},
+            </if>
+            <if test="userIntro != null">
+                #{userIntro,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="emailConfirmed != null">
+                #{emailConfirmed,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectByEmail" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_user
+        where email = #{email}
+    </select>
+    <resultMap id="BaseResultMapWithVoteAndFav" type="com.example.demo.extmodel.UserExt" extends="BaseResultMap">
+        <association column="user_id_for_vote" property="voteNum" javaType="java.lang.Integer" select="com.example.demo.dao.VoteBookUserMapper.selectCountByUserId"/>
+        <association column="user_id_for_fav" property="favNum" javaType="java.lang.Integer" select="com.example.demo.dao.FavBookUserMapper.selectCountByUserId"/>
+    </resultMap>
+    <select id="selectUserWithVoteAndFavByPrimaryKey" resultMap="BaseResultMapWithVoteAndFav">
+        select
+        <include refid="Base_Column_List" />, user_id as user_id_for_vote, user_id as user_id_for_fav
+        from t_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    <!--中间表 而且这个中间表没有对应的model mapper接口 mapper文件-->
+    <select id="selectUserByFollowingUserId" resultMap="BaseResultMap"><!-- 我关注的人-->
+        select
+        user_id, user_name, password, large_avatar, register_date, personal_website, user_intro, email, email_confirmed, code
+        from t_followed_user_following_user as t
+        left outer join t_user as b on t.ed_user_id = b.user_id
+        where t.ing_user_id = #{userId}
+    </select>
+    <select id="selectUserByFollowedUserId" resultMap="BaseResultMap"><!-- 关注我的人-->
+        select
+        user_id, user_name, password, large_avatar, register_date, personal_website, user_intro, email, email_confirmed, code
+        from t_followed_user_following_user as t
+        left outer join t_user as b on t.ing_user_id = b.user_id
+        where t.ed_user_id = #{userId}
+    </select>
+</mapper>
